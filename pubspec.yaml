@@ -1,6 +1,6 @@
 name: my_readme_updater
 description: A sample flutter package that updates project structure in readme file whenever we run a git command.
-version: 1.0.7
+version: 1.0.8
 homepage: https://github.com/usmannaushahi/my_readme_updater
 repository: https://github.com/usmannaushahi/my_readme_updater
 

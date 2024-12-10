@@ -16,7 +16,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  my_readme_updater: ^1.0.6
+  my_readme_updater: ^1.0.8
 ```
 
 To automatically update the README.md file before every commit, you can set up a Git pre-commit hook using the following command:
@@ -34,3 +34,10 @@ dart run my_readme_updater
 ## Additional Notes
 Ensure that your project structure in the lib/ directory is correct before running the tool.
 This package works best for projects that maintain a clean folder structure and want to have it documented automatically.
+<!-- BEGIN PROJECT STRUCTURE -->
+```
+└─ lib
+   └─ my_readme_updater.dart
+
+```
+<!-- END PROJECT STRUCTURE -->
