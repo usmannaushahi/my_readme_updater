@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:process_run/shell.dart';
 
-
 Future<void> run(List<String> arguments) async {
   final setup = arguments.contains('--setup');
   if (setup) {
@@ -10,7 +9,6 @@ Future<void> run(List<String> arguments) async {
     await updateReadme();
   }
 }
-
 
 /// Sets up a Git pre-commit hook to automatically update the README.md file.
 ///
@@ -35,9 +33,6 @@ dart run my_readme_updater
   }
 }
 
-
-
-
 String generateTreeStructure(String directory) {
   final dir = Directory(directory);
   if (!dir.existsSync()) {
@@ -57,7 +52,8 @@ String generateTreeStructure(String directory) {
         writeTree(entity, '$indent${isLast ? '   ' : '│  '}', isLastEntity);
       } else if (entity is File) {
         final fileName = entity.uri.pathSegments.last;
-        buffer.writeln('$indent${isLast ? '   ' : '│  '}${isLastEntity ? '└─' : '├─'} $fileName');
+        buffer.writeln(
+            '$indent${isLast ? '   ' : '│  '}${isLastEntity ? '└─' : '├─'} $fileName');
       }
     }
   }
@@ -80,7 +76,8 @@ Future<void> updateReadme() async {
 
   if (!readmeFile.existsSync()) {
     print('README.md not found! Creating a new one.');
-    readmeFile.writeAsStringSync('## Project Structure\n\n$startMarker\n\n$endMarker\n');
+    readmeFile.writeAsStringSync(
+        '## Project Structure\n\n$startMarker\n\n$endMarker\n');
   }
 
   final readmeContent = readmeFile.readAsLinesSync();
@@ -134,4 +131,3 @@ Future<void> updateReadme() async {
   readmeFile.writeAsStringSync(tempContent.toString());
   print('README updated successfully.');
 }
-

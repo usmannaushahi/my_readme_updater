@@ -16,7 +16,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  my_readme_updater: ^1.0.9
+  my_readme_updater: ^1.0.10
 ```
 
 To automatically update the README.md file before every commit, you can set up a Git pre-commit hook using the following command:
