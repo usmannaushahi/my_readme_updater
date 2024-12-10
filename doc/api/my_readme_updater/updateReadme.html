@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the updateReadme function from the my_readme_updater library, for the Dart programming language.">
+  <title>updateReadme function - my_readme_updater library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">my_readme_updater</a></li>
+    <li><a href="../my_readme_updater/my_readme_updater-library.html">my_readme_updater.dart</a></li>
+    <li class="self-crumb">updateReadme function</li>
+  </ol>
+  <div class="self-name">updateReadme</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="my_readme_updater&#47;my_readme_updater-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-function">updateReadme</span> function 
+ 
+</h1></div>
+
+    <section class="multi-line-signature">
+        
+
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">updateReadme</span>(<wbr>)
+
+        
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Updates the <code>README.md</code> file with the current project structure.</p>
+<p>This function scans the <code>lib/</code> directory to generate a tree-like structure
+and replaces the relevant section in the <code>README.md</code> file.</p>
+<p>Throws a <a href="https://api.flutter.dev/flutter/dart-io/FileSystemException-class.html">FileSystemException</a> if the <code>README.md</code> file is not found.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; updateReadme() async {
+  const startMarker = &quot;&lt;!-- BEGIN PROJECT STRUCTURE --&gt;&quot;;
+  const endMarker = &quot;&lt;!-- END PROJECT STRUCTURE --&gt;&quot;;
+  final readmeFile = File(&#39;README.md&#39;);
+
+  if (!readmeFile.existsSync()) {
+    print(&#39;README.md not found! Creating a new one.&#39;);
+    readmeFile.writeAsStringSync(&#39;## Project Structure\n\n$startMarker\n\n$endMarker\n&#39;);
+  }
+
+  final readmeContent = readmeFile.readAsLinesSync();
+  final tempContent = StringBuffer();
+
+  bool foundStart = false, foundEnd = false;
+
+  for (var line in readmeContent) {
+    if (line == startMarker) {
+      foundStart = true;
+      tempContent.writeln(line);
+
+      &#47;&#47; Insert the updated tree structure
+      tempContent.writeln(&#39;```&#39;);
+      try {
+        final treeContent = generateTreeStructure(&#39;lib&#39;);
+        tempContent.writeln(treeContent);
+      } catch (e) {
+        print(&#39;Failed to generate project structure: $e&#39;);
+        return;
+      }
+      tempContent.writeln(&#39;```&#39;);
+    } else if (line == endMarker) {
+      foundEnd = true;
+    }
+
+    if (!foundStart || foundEnd) {
+      tempContent.writeln(line);
+    }
+  }
+
+  if (!foundStart) {
+    print(&#39;Start marker missing. Adding it.&#39;);
+    tempContent.writeln(startMarker);
+    tempContent.writeln(&#39;```&#39;);
+    try {
+      final treeContent = generateTreeStructure(&#39;lib&#39;);
+      tempContent.writeln(treeContent);
+    } catch (e) {
+      print(&#39;Failed to generate project structure: $e&#39;);
+      return;
+    }
+    tempContent.writeln(&#39;```&#39;);
+  }
+
+  if (!foundEnd) {
+    print(&#39;End marker missing. Adding it.&#39;);
+    tempContent.writeln(endMarker);
+  }
+
+  readmeFile.writeAsStringSync(tempContent.toString());
+  print(&#39;README updated successfully.&#39;);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">my_readme_updater</a></li>
+    <li><a href="../my_readme_updater/my_readme_updater-library.html">my_readme_updater</a></li>
+    <li class="self-crumb">updateReadme function</li>
+</ol>
+
+
+    <h5>my_readme_updater library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    my_readme_updater
+      1.0.7
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

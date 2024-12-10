@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the generateTreeStructure function from the my_readme_updater library, for the Dart programming language.">
+  <title>generateTreeStructure function - my_readme_updater library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">my_readme_updater</a></li>
+    <li><a href="../my_readme_updater/my_readme_updater-library.html">my_readme_updater.dart</a></li>
+    <li class="self-crumb">generateTreeStructure function</li>
+  </ol>
+  <div class="self-name">generateTreeStructure</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="my_readme_updater&#47;my_readme_updater-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-function">generateTreeStructure</span> function 
+ 
+</h1></div>
+
+    <section class="multi-line-signature">
+        
+
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+<span class="name ">generateTreeStructure</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="generateTreeStructure-param-directory"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">directory</span></span></li>
+</ol>)
+
+        
+
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">String generateTreeStructure(String directory) {
+  final dir = Directory(directory);
+  if (!dir.existsSync()) {
+    throw Exception(&#39;Directory $directory does not exist.&#39;);
+  }
+
+  final buffer = StringBuffer();
+
+  void writeTree(Directory dir, String indent, bool isLast) {
+    final dirName = dir.path.split(Platform.pathSeparator).last;
+    buffer.writeln(&#39;$indent${isLast ? &#39;└─&#39; : &#39;├─&#39;} $dirName&#39;);
+    final entities = dir.listSync();
+    for (var i = 0; i &lt; entities.length; i++) {
+      final entity = entities[i];
+      final isLastEntity = i == entities.length - 1;
+      if (entity is Directory) {
+        writeTree(entity, &#39;$indent${isLast ? &#39;   &#39; : &#39;│  &#39;}&#39;, isLastEntity);
+      } else if (entity is File) {
+        final fileName = entity.uri.pathSegments.last;
+        buffer.writeln(&#39;$indent${isLast ? &#39;   &#39; : &#39;│  &#39;}${isLastEntity ? &#39;└─&#39; : &#39;├─&#39;} $fileName&#39;);
+      }
+    }
+  }
+
+  writeTree(dir, &#39;&#39;, true);
+  return buffer.toString();
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">my_readme_updater</a></li>
+    <li><a href="../my_readme_updater/my_readme_updater-library.html">my_readme_updater</a></li>
+    <li class="self-crumb">generateTreeStructure function</li>
+</ol>
+
+
+    <h5>my_readme_updater library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    my_readme_updater
+      1.0.7
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
