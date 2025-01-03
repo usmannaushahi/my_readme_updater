@@ -1,3 +1,6 @@
+## 1.0.12
+- Cleaned README.md to explain how to remove the prehook
+
 ## 1.0.11
 - Updated README.md to explain how to remove the package
 

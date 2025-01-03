@@ -16,7 +16,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  my_readme_updater: ^1.0.11
+  my_readme_updater: ^1.0.12
 ```
 
 To automatically update the README.md file before every commit, you can set up a Git pre-commit hook using the following command:
@@ -31,6 +31,7 @@ You can manually update the README.md by running the following command:
 dart run my_readme_updater
 ```
 
+## Uninstall
 
 To remove the package completely, remove it from the pubspec.yaml file. 
 Make sure to remove the pre-commit by running the following command:
